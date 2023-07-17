@@ -185,6 +185,10 @@ input[type="submit"] {
 	border-radius: 60px ;
 }
 
+input[type="submit"]:hover {
+	opacity: 0.8;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
@@ -213,4 +217,8 @@ footer nav ul {
 	border-radius: 20px;
 	border: 1px solid black;
 	
+}
+
+nav img:hover {
+	opacity: 0.5;
 }
