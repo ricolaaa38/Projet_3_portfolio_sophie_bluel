@@ -17,7 +17,7 @@ async function getUser() {
         let token = result.token;
         window.location.href = "index.html"
         console.log(result)
-        localStorage.setItem("token", token.value)
+        localStorage.setItem("token", token)
     } else {
         console.log("une erreur c'est produite")
     };
