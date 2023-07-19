@@ -1,8 +1,8 @@
 async function getUser() {
 
     let users = {
-    email: document.getElementById("email").value,
-    password: document.getElementById("password").value
+    email: document.getElementById("emailLogin").value,
+    password: document.getElementById("passwordLogin").value
 }
     let response = await fetch("http://localhost:5678/api/users/login", {
         method: "POST",
@@ -19,15 +19,33 @@ async function getUser() {
         console.log(result)
         localStorage.setItem("token", token)
     } else {
+        afficherMessageErreur();
         console.log("une erreur c'est produite")
     };
 
 }
 
+function afficherMessageErreur() {
+    let spanErreurMessage = document.getElementById("erreurMessage")
 
-const form = document.querySelector("form")
-form.addEventListener("submit", (event) => {
+    if (!spanErreurMessage) {
+        let popup = document.querySelector(".message")
+        spanErreurMessage = document.createElement("span")
+        spanErreurMessage.id = "erreurMessage"
+        
+        popup.append(spanErreurMessage)
+    }
+    
+    spanErreurMessage.innerText = "les identifiants mot de passe ou e-mail sont inconnus";
+}
+
+
+const formLogin = document.querySelector(".formulaire-login")
+formLogin.addEventListener("submit", (event) => {
     event.preventDefault();
     getUser();
    
 })
+
+
+  

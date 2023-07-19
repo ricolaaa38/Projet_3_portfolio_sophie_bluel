@@ -10,6 +10,7 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script type="module" src="login.js" defer></script>
+	<script type="module" src="logout.js" defer></script>
 </head>
 <body>
 <header>
@@ -18,7 +19,7 @@
 		<ul>
 			<li><a href=index.html>projets</a></li>
 			<li><a href=index.html>contact</a></li>
-			<li><a href=login.html>login</a></li>
+			<li><a href=login.html class="login-out">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -28,10 +29,11 @@
     <h2>Login</h2>
     <form class="formulaire-login">
         <label for="email">E-mail</label>
-        <input type="email" name="email" id="email">
+        <input type="email" name="email" id="emailLogin">
         <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="passwordLogin">
         <input type="submit" value="Se connecter">
+		<p class="message"></p>
         <p>Mot de passe oublié</p>
     </form>
     </div>
