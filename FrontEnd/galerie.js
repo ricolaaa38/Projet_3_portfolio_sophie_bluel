@@ -16,16 +16,42 @@ function genererProjets(projets) {
     sectionProjets.appendChild(projetElement);
     projetElement.appendChild(imageProjet);
     projetElement.appendChild(nomProjet);
+    }
   }
-}
+
 
 genererProjets(projets);
 
 
+function genererProjetsModal(projets) {
+  for (let i = 0; i < projets.length; i++) {
+    const article = projets[i];
+    const sectionModal = document.querySelector(".zoneModifProjets")
+    const modalElement = document.createElement("article");
+    modalElement.dataset.id = projets[i].id;
+
+    const imageModal = document.createElement("img");
+    imageModal.src = article.imageUrl;
+    const nomModal = document.createElement("figcaption");
+    nomModal.innerText = "éditer";
+    const logoTrash = document.createElement("button");
+    logoTrash.innerHTML = '<i class="fa-solid fa-trash"></i>'
+
+    sectionModal.appendChild(modalElement);
+    modalElement.appendChild(logoTrash);
+    modalElement.appendChild(imageModal);
+    modalElement.appendChild(nomModal);
+    }
+  }
+
+genererProjetsModal(projets);
+
 const boutonTous = document.querySelector(".tous");
 boutonTous.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML ="";
-    genererProjets(projets)
+    document.querySelector(".zoneModifProjets").innerHTML ="";
+    genererProjets(projets);
+    
 })
 
 const boutonObjets = document.querySelector(".objets");
@@ -36,7 +62,7 @@ boutonObjets.addEventListener("click", function () {
     }
   });
     document.querySelector(".gallery").innerHTML = "";
-    genererProjets(projetsObjets);
+    genererProjets(projetsObjets);    
 
 });
 

@@ -1,3 +1,6 @@
+let connecte = true;
+
+
 async function getUser() {
 
     let users = {
@@ -17,7 +20,9 @@ async function getUser() {
         let token = result.token;
         window.location.href = "index.html"
         console.log(result)
-        localStorage.setItem("token", token)
+        sessionStorage.setItem("token", token)
+        connecte = true;
+        sessionStorage.setItem("connecte", connecte);
     } else {
         afficherMessageErreur();
         console.log("une erreur c'est produite")
@@ -36,7 +41,7 @@ function afficherMessageErreur() {
         popup.append(spanErreurMessage)
     }
     
-    spanErreurMessage.innerText = "les identifiants mot de passe ou e-mail sont inconnus";
+    spanErreurMessage.innerText = "les identifiants mot de passe et/ou e-mail sont inconnus";
 }
 
 

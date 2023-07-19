@@ -54,7 +54,7 @@ a {
 
 body {
 	max-width: 1140px;
-	margin:auto;
+	margin: auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
@@ -231,14 +231,37 @@ nav img:hover {
 
 /* code css modale ajout/suppression projets */
 
+body .barre-edition {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
+	margin: 0;
+	width: 100%;
+}
+.barre-edition p, .barre-edition .fa-solid {
+	color: #fff;
+	margin: 10px 5px 10px 5px;
+}
+
+.barre-edition button {
+	border-radius: 20px;
+	margin: 5px;
+	padding: 5px 10px 5px 10px;
+
+}
+
 .titreEtModal {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.titreEtModal a {
-	margin-left: 20px;
+.titreEtModal a, .titreEtModal .fa-solid {
+	margin-left: 10px;
+	margin-right: 5px;
 }
+
 
 /* *:focus {
 	box-shadow: 0 0 10px blue	;
@@ -258,6 +281,9 @@ nav img:hover {
 }
 
 .modal-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	overflow: auto;
 	width: 600px;
 	max-width: calc(100vh-20px);
@@ -266,6 +292,89 @@ nav img:hover {
 	background-color: #fff;
 	animation: slideFromTop 0.5s both;
 }
+
+.js-modal-close {
+	align-self: flex-end;
+	background-color: white;
+	border: white;
+}
+
+.js-modal-close:hover {
+	opacity: 0.5;
+}
+
+.modal-wrapper h3 {
+	font-size: 26px;
+}
+
+.zoneModifProjets {
+	width: 80%;
+	display: grid;
+	justify-content: center;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+
+}
+.zoneModifProjets article {
+	position: relative;
+}
+
+.zoneModifProjets img {
+	width: 100%;
+}
+
+.zoneModifProjets button {
+	border: 3px solid black;
+	border-radius: 5px;
+	background-color: black;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.fa-trash {
+	color: white;
+}
+
+.zoneModifProjets button:hover {
+	opacity: 0.6;
+}
+
+
+hr {
+	color: #b3b3b3;
+	width: 70%;
+	border: 1px solid;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.ajoutPhotoBtn {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
+.ajoutPhotoBtn:hover {
+	opacity: 0.8;
+}
+
+.modal-wrapper p {
+	color: red;
+}
+.modal-wrapper p:hover {
+	opacity: 0.6;
+}
+
+
 
 .modal[aria-hidden="true"] {
 	animation-name: fadeOut;

@@ -1,19 +1,25 @@
+let myToken = sessionStorage.getItem("token");
+let estConnecte = sessionStorage.getItem("connecte");
 
-const myToken = localStorage.getItem("token");
 
-function logoutBtn (logout, myToken) {
-    logout.addEventListener("click", function () {
-    myToken = "";
-    localStorage.setItem("token", myToken);
-})
-}
 
-if (myToken !== "") {
+if (estConnecte = true && myToken != "") {
     console.log("connecté", myToken)
     const logout = document.querySelector(".login-out")
     logout.innerText = "logout";
-    logoutBtn(logout, myToken);
+    logoutBtn(logout);
+    console.log(estConnecte)
 } else {
     console.log("non connecté", myToken)
+    console.log(estConnecte)
 }
 
+
+function logoutBtn (logout) {
+    logout.addEventListener("click", function () {
+        myToken = "";
+        estConnecte = false
+        sessionStorage.setItem("token", myToken);
+        sessionStorage.setItem("connecte", estConnecte);
+})
+}

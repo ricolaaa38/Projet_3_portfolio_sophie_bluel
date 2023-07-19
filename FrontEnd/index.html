@@ -16,6 +16,11 @@
 	<script type="module" src="app.js" defer></script>
 </head>
 <body>
+	<aside class="barre-edition" style="display: none;">
+		<i class="fa-solid fa-pen-to-square"></i>
+		<p>Mode édition</p>
+		<button>publier les changements</button>
+	</aside>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
@@ -79,13 +84,14 @@
 <!-- popup de modal -->
 <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titleModal" style="display: none;">
 	<div class="modal-wrapper js-modal-stop">
-		<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+		<button class="js-modal-close"><i class="fa-solid fa-xmark fa-xl"></i></button>
 		<h3 id="titleModal">Galerie photo</h3>
 		<section class="zoneModifProjets">
-
+		<!-- emplacement des projets et modif dans la modal gerer par js -->
 		</section>
+		<hr>
 		<button class="ajoutPhotoBtn">Ajouter une photo</button>
-		<p>Supprimer toute la galerie</p>
+		<p>Supprimer la galerie</p>
 	</div>
 </aside>
 

@@ -2,7 +2,7 @@ let modal = null;
 const focusableSelector = "button, a, input, textarea"
 let focusables = [];
 let previouslyFocusedElement = null;
-const myToken = localStorage.getItem("token");
+const myToken = sessionStorage.getItem("token");
 
 
 
@@ -26,17 +26,18 @@ const openModal = function (e) {
 const closeModal = function (e) {
     if (modal === null) return;
     if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
-    e.preventDefault();
-    window.setTimeout(function () {
-        modal.style.display = "none";
-        modal = null;
-    }, 500);  
+    e.preventDefault(); 
     modal.setAttribute("aria-hidden", true);
     modal.removeAttribute("aria-modal");
     modal.removeEventListener("click", closeModal);
     modal.querySelector(".js-modal-close").removeEventListener("click", closeModal);
     modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
-   
+    const hideModal = function () {
+        modal.style.display = "none";
+        modal.removeEventListener("animationend", hideModal);
+        modal = null;
+    }
+    modal.addEventListener("animationend", hideModal);
 }
 
 // fonction pour empecher la fermeture de la modal au click sur celle-ci
@@ -82,4 +83,7 @@ window.addEventListener("keydown", function (e) {
 if (myToken !== "") {
     const lienJsModal = document.querySelector(".js-modal");
     lienJsModal.style.display = null;
+    const barreEdition = document.querySelector(".barre-edition");
+    barreEdition.style.display = null;
 }
+
