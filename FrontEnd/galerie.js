@@ -1,6 +1,7 @@
 const works = await fetch("http://localhost:5678/api/works");
 const projets = await works.json();
 
+
 function genererProjets(projets) {
   for (let i = 0; i < projets.length; i++) {
     const article = projets[i];
@@ -36,20 +37,46 @@ function genererProjetsModal(projets) {
     nomModal.innerText = "éditer";
     const logoTrash = document.createElement("button");
     logoTrash.innerHTML = '<i class="fa-solid fa-trash"></i>'
+    logoTrash.dataset.id = projets[i].id
 
     sectionModal.appendChild(modalElement);
     modalElement.appendChild(logoTrash);
     modalElement.appendChild(imageModal);
     modalElement.appendChild(nomModal);
+
+    // supprimerProjet(logoTrash)
+    
+    logoTrash.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const iconeElement = article.id;
+    let myToken = sessionStorage.getItem("token");
+    console.log(iconeElement);
+
+    let response = await fetch(`http://localhost:5678/api/works/${iconeElement}`, {
+        method: "DELETE",
+        headers: {
+            accept: "*/*",
+            Authorization: `Bearer ${myToken}`
+        },
+    });  
+    if (response.ok) {
+      console.log("Projet supprimé avec succés");
+    } else {
+      console.log("Echec de suppression")
+    }
+  })
     }
   }
 
 genererProjetsModal(projets);
 
+ 
+
+
 const boutonTous = document.querySelector(".tous");
 boutonTous.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML ="";
-    document.querySelector(".zoneModifProjets").innerHTML ="";
     genererProjets(projets);
     
 })
