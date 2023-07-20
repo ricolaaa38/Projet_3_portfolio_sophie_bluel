@@ -52,7 +52,7 @@ a {
 	color: black;
 }
 
-body {
+.body2 {
 	max-width: 1140px;
 	margin: auto;
 	font-family: 'Work Sans' ;
@@ -280,17 +280,44 @@ body .barre-edition {
 	animation: fadeIn .3s both;
 }
 
+.modal2 {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	animation: fadeIn .3s both;
+}
+
 .modal-wrapper {
 	overflow: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 600px;
-	max-width: calc(100vh-20px);
+	max-width: calc(100vw-20px);
 	max-height: calc(100vh-20px);
 	padding: 20px;
 	background-color: #fff;
 	animation: slideFromTop 0.5s both;
+	border-radius: 20px;
+}
+
+.modal-wrapper2 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 600px;
+	max-width: calc(100vw-20px);
+	max-height: calc(100vh-20px);
+	padding: 20px;
+	background-color: #fff;
+	animation: slideFromTop 0.5s both;
+	border-radius: 20px;
 }
 
 .js-modal-close {
@@ -324,21 +351,46 @@ body .barre-edition {
 	width: 100%;
 }
 
-.zoneModifProjets button {
-	border: 3px solid black;
-	border-radius: 5px;
-	background-color: black;
+.divLogo {
 	position: absolute;
 	top: 5px;
 	right: 5px;
 }
 
+.zoneModifProjets button {
+	background-color: black;
+	border: 3px solid black;
+	border-radius: 5px;
+	margin-left: 2px;
+}
+
 .fa-trash {
+	color: white;
+	background-color: black;
+}
+
+.logoFleche {
+	opacity: 0;
+}
+
+.modalElement:hover .logoFleche {
+	opacity: 0.6;
+}
+
+.modalElement:hover .logoFleche:hover {
+	opacity: 1;
+}
+
+.fa-arrows-up-down-left-right {
 	color: white;
 }
 
-.zoneModifProjets button:hover {
+.logoTrash {
 	opacity: 0.6;
+}
+
+.logoTrash:hover {
+	opacity: 1;
 }
 
 
@@ -350,22 +402,6 @@ hr {
 	margin-bottom: 15px;
 }
 
-.ajoutPhotoBtn {
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
-}
-
-.ajoutPhotoBtn:hover {
-	opacity: 0.8;
-}
 
 .modal-wrapper p {
 	color: red;
@@ -376,11 +412,11 @@ hr {
 
 
 
-.modal[aria-hidden="true"] {
+.modal[aria-hidden="true"], .modal2[aria-hidden="true"] {
 	animation-name: fadeOut;
 }
 
-.modal[aria-hidden="true"] .modal-wrapper {
+.modal[aria-hidden="true"] .modal-wrapper, .modal2[aria-hidden="true"] .modal-wrapper2 {
 	animation-name: slideToBottom;
 }
 
@@ -402,4 +438,25 @@ hr {
 @keyframes slideToBottom {
 	from { transform: translateY(0); }
 	to { transform: translateY(50px); }
+}
+
+/* bouton de la modal 1 */
+.js-modal2 {
+	text-align: center;
+	font: bold 14px Arial;
+	text-decoration: none;
+	background-color: #1D6154;
+	color: white;
+	padding: 17px 15px 0 15px;
+	margin: 20px 10px 30px 10px ;
+	width: 237px;
+	height: 36px;
+	font-family: 'Syne';
+	font-weight: 700;
+	border-radius: 60px;
+}
+
+.js-modal2:hover {
+	color: white;
+	opacity: 0.8;
 }

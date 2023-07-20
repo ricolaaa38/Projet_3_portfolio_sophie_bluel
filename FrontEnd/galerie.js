@@ -30,17 +30,26 @@ function genererProjetsModal(projets) {
     const sectionModal = document.querySelector(".zoneModifProjets")
     const modalElement = document.createElement("article");
     modalElement.dataset.id = projets[i].id;
+    modalElement.className = "modalElement";
 
     const imageModal = document.createElement("img");
     imageModal.src = article.imageUrl;
     const nomModal = document.createElement("figcaption");
     nomModal.innerText = "éditer";
+    const divLogo = document.createElement("div");
+    divLogo.className = "divLogo";
+    const logoFleche = document.createElement("button");
+    logoFleche.innerHTML = `<i class="fa-solid fa-arrows-up-down-left-right"></i>`;
+    logoFleche.className = "logoFleche";
     const logoTrash = document.createElement("button");
-    logoTrash.innerHTML = '<i class="fa-solid fa-trash"></i>'
-    logoTrash.dataset.id = projets[i].id
+    logoTrash.innerHTML = '<i class="fa-solid fa-trash"></i>';
+    logoTrash.className = "logoTrash"
+    logoTrash.dataset.id = projets[i].id;
 
     sectionModal.appendChild(modalElement);
-    modalElement.appendChild(logoTrash);
+    modalElement.appendChild(divLogo);
+    divLogo.appendChild(logoFleche);
+    divLogo.appendChild(logoTrash);
     modalElement.appendChild(imageModal);
     modalElement.appendChild(nomModal);
 
@@ -61,9 +70,9 @@ function genererProjetsModal(projets) {
         },
     });  
     if (response.ok) {
-      console.log("Projet supprimé avec succés");
+      alert("Projet supprimé avec succés");
     } else {
-      console.log("Echec de suppression")
+      alert("Echec de suppression")
     }
   })
     }

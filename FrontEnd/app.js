@@ -1,5 +1,5 @@
 let modal = null;
-const focusableSelector = "button, a, input, textarea"
+const focusableSelector = "button, a, input, textarea, select"
 let focusables = [];
 let previouslyFocusedElement = null;
 const myToken = sessionStorage.getItem("token");
@@ -21,6 +21,7 @@ const openModal = function (e) {
     modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);
     
 }
+
 
 // fonction pour fermer la modal
 const closeModal = function (e) {
@@ -63,6 +64,7 @@ const focusInModal = function (e) {
     focusables[index].focus();
 }
 
+
 // ouverture de la modale 1 sur le click du lien
 document.querySelectorAll(".js-modal").forEach(a => {
     a.addEventListener("click", openModal );
@@ -70,19 +72,115 @@ document.querySelectorAll(".js-modal").forEach(a => {
 })
 
 
-
 // Ajout de controle clavier sur la modale
 window.addEventListener("keydown", function (e) {
     if (e.key === "Escape" || e.key === "Esc") {
-        closeModal(e);
+        if (modal2 !== null) {
+            closeModal2(e);
+        } else {
+            closeModal(e);
+        }
     }
-    if (e.key === "Tab" && modal !== null) {
+    if (e.key === "Tab" && modal !== null && modal2 === null) {
         focusInModal(e);
+    }
+    if (e.key === "Tab" && modal2 !== null) {
+        focusInModal2(e);
     }
 })
 
+
+// Modale 2 Ajout photo
+
+let modal2 = null
+let focusables2 = [];
+
+
+// fonction pour l'ouverture de la modal 2
+
+const openModal2 = function (e) {
+    e.preventDefault();
+    modal2 = document.querySelector(e.target.getAttribute("href"));
+    focusables2 = Array.from(modal2.querySelectorAll(focusableSelector))
+    previouslyFocusedElement = document.querySelector(":focus");
+    modal2.style.display = null;
+    focusables2[0].focus();
+    modal2.removeAttribute("aria-hidden");
+    modal2.setAttribute("aria-modal", "true");
+    modal2.addEventListener("click", closeModal2);
+    modal2.querySelector(".js-modal2-close").addEventListener("click", closeModal2);
+    modal2.querySelector(".js-modal2-stop").addEventListener("click", stopPropagation);
+
+}
+
+// fonction pour fermer la modal
+
+const closeModal2 = function (e) {
+    if (modal2 === null) return;
+    if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
+    e.preventDefault();
+    modal2.setAttribute("aria-hidden", "true");
+    modal2.removeAttribute("aria-modal");
+    modal2.removeEventListener("click", closeModal2);
+    modal2.querySelector(".js-modal2-close").removeEventListener("click", closeModal2);
+    modal2.querySelector(".js-modal2-stop").removeEventListener("click", stopPropagation);
+    const hideModal2 = function () {
+        modal2.style.display = "none";
+        modal2.removeEventListener("animationend", hideModal2)
+        modal2 = null;
+    }
+    modal2.addEventListener("animationend", hideModal2);
+       
+   
+}
+
+// fonction pour le controle avec Tab
+const focusInModal2 = function (e) {
+    e.preventDefault();
+    let index = focusables2.findIndex(f => f === modal2.querySelector(":focus"));
+    if (e.shiftkey === true) {
+        index --;
+    } else {
+        index ++;
+    }
+    if (index >= focusables2.length) {
+        index = 0;
+    }
+    if (index < 0) {
+        index = focusables2.length - 1;
+    }
+    focusables2[index].focus();
+}
+
+
+// ouverture de la modale 2 sur le click du lien
+document.querySelectorAll(".js-modal2").forEach(a => {
+    a.addEventListener("click", openModal2 );
+    
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Apparition des éléments de la page si l'administrateur est connecté
-if (myToken !== "") {
+if (myToken !== null && myToken !== "") {
     const lienJsModal = document.querySelector(".js-modal");
     lienJsModal.style.display = null;
     const barreEdition = document.querySelector(".barre-edition");

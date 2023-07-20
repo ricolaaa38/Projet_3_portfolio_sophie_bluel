@@ -15,12 +15,14 @@
 	<script type="module" src="main.js" defer></script>
 	<script type="module" src="app.js" defer></script>
 </head>
+
 <body>
-	<aside class="barre-edition" style="display: none;">
-		<i class="fa-solid fa-pen-to-square"></i>
-		<p>Mode édition</p>
-		<button>publier les changements</button>
-	</aside>
+<div class="barre-edition" style="display: none;">
+	<i class="fa-solid fa-pen-to-square"></i>
+	<p>Mode édition</p>
+	<button>publier les changements</button>
+</div>
+<div class="body2">
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
@@ -90,15 +92,15 @@
 		<!-- emplacement des projets et modif dans la modal gerer par js -->
 		</section>
 		<hr>
-		<a href="#modal2" class="js-modal2"><button class="ajoutPhotoBtn">Ajouter une photo</button></a>
-		
+		<!-- <button class="ajoutPhotoBtn"><a href="#modal2" class="js-modal2">Ajouter une photo</a></button> -->
+		<a href="#modal2" class="js-modal2">Ajouter une Photo</a>
 		<p>Supprimer la galerie</p>
 	</div>
 </aside>
-<aside id="modal2" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titleModal" style="display: none;">
-	<div class="modal-wrapper js-modal-stop">
-		<button class="js-modal-close"><i class="fa-solid fa-xmark fa-xl"></i></button>
-		<h3 id="titleModal">Ajout photo</h3>
+<aside id="modal2" class="modal2" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titleModal2" style="display: none;">
+	<div class="modal-wrapper2 js-modal2-stop">
+		<button class="js-modal2-close"><i class="fa-solid fa-xmark fa-xl"></i></button>
+		<h3 id="titleModal2">Ajout photo</h3>
 		<form class="ajoutPhoto">
 			<input type="image" name="image" id="image">
 			<label for="image"><i class="fa-regular fa-image"></i></label>
@@ -112,9 +114,11 @@
 				<option value="appartements">Appartements</option>
 				<option value="hotelsBarRestaurants">Hôtels Bar & Restaurants</option>
 			</select>
+			<hr>
+			<input type="submit" value="valider">
 		</form>
 	</div>
 </aside>
-
+</div>
 </body>
 </html>
