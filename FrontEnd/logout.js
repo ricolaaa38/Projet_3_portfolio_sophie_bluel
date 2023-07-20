@@ -3,7 +3,7 @@ let estConnecte = sessionStorage.getItem("connecte");
 
 
 
-if (estConnecte = true && myToken != "") {
+if (estConnecte = true && myToken !== "") {
     console.log("connecté", myToken)
     const logout = document.querySelector(".login-out")
     logout.innerText = "logout";

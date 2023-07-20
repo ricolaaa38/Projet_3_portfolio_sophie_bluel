@@ -63,11 +63,13 @@ const focusInModal = function (e) {
     focusables[index].focus();
 }
 
-// ouverture de la modale sur le click du lien
+// ouverture de la modale 1 sur le click du lien
 document.querySelectorAll(".js-modal").forEach(a => {
     a.addEventListener("click", openModal );
     
 })
+
+
 
 // Ajout de controle clavier sur la modale
 window.addEventListener("keydown", function (e) {

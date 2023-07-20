@@ -90,8 +90,29 @@
 		<!-- emplacement des projets et modif dans la modal gerer par js -->
 		</section>
 		<hr>
-		<button class="ajoutPhotoBtn">Ajouter une photo</button>
+		<a href="#modal2" class="js-modal"><button class="ajoutPhotoBtn">Ajouter une photo</button></a>
+		
 		<p>Supprimer la galerie</p>
+	</div>
+</aside>
+<aside id="modal2" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titleModal" style="display: none;">
+	<div class="modal-wrapper js-modal-stop">
+		<button class="js-modal-close"><i class="fa-solid fa-xmark fa-xl"></i></button>
+		<h3 id="titleModal">Ajout photo</h3>
+		<form class="ajoutPhoto">
+			<input type="image" name="image" id="image">
+			<label for="image"><i class="fa-regular fa-image"></i></label>
+			<input type="button" name="file" id="file">
+			<label for="file">+ Ajouter Photo</label>
+			<input type="text" name="titre" id="titre">
+			<label for="titre">Titre</label>
+			<select name="categorie" id="categorie">
+				<option value=""></option>
+				<option value="objet">Objet</option>
+				<option value="appartements">Appartements</option>
+				<option value="hotelsBarRestaurants">Hôtels Bar & Restaurants</option>
+			</select>
+		</form>
 	</div>
 </aside>
 

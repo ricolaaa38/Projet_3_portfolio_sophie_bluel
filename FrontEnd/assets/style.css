@@ -281,10 +281,10 @@ body .barre-edition {
 }
 
 .modal-wrapper {
+	overflow: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	overflow: auto;
 	width: 600px;
 	max-width: calc(100vh-20px);
 	max-height: calc(100vh-20px);
