@@ -505,30 +505,8 @@ select {
 .fa-image {
 	display: block;
 	color: #b9c5cc;
+	margin-bottom: 15px;
 }
-
-/* 
-label.btnAjouterPhoto {
-	margin-top: 25px;
-	margin-bottom: 5px;
-}
-
-.btnAjouterPhoto {
-	text-align: center;
-	font: bold 16px Arial;
-	text-decoration: none;
-	background-color: #cbd6dc;
-	color: #306685;
-	padding-top: 15px;
-	width: 200px;
-	height: 36px;
-	font-family: 'Syne';
-	font-weight: 700;
-	border-radius: 60px;
-}
-.btnAjouterPhoto:hover {
-	opacity: 0.8;
-} */
 
 
 .zone-inputFile {
@@ -546,6 +524,10 @@ label.btnAjouterPhoto {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.photoAjouter img:hover {
+	opacity: 0.8;
 }
 
 .photoAjouter img {

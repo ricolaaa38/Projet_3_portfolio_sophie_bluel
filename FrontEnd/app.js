@@ -116,9 +116,10 @@ const closeModal2 = function (e) {
 }
 
 // fonction pour le controle avec Tab
+
 const focusInModal2 = function (e) {
     e.preventDefault();
-    let index2 = focusables2.findIndex(f => f === modal2.querySelector(":focus"));
+    let index2 = focusables2.findIndex(f => f === modal2.querySelector(":focus"));    
     if (e.shiftkey === true) {
         index2 --;
     } else {
@@ -131,7 +132,11 @@ const focusInModal2 = function (e) {
         index2 = focusables2.length - 1;
     }
     focusables2[index2].focus();
-}
+    }
+    
+    
+    
+
 
 
 
@@ -185,19 +190,34 @@ if (myToken !== null && myToken !== "") {
 }
 
 
-// fonction pour faire un apercu de l'image à uploader
+// fonction pour faire un apercu de l'image à uploader et controler la taille du fichier
 
 
 const choixImg = document.getElementById("imgFile");
 const imgPreview = document.querySelector(".photoAjouter");
 const inputFile = document.querySelector(".zone-inputFile");
+const logoImg = document.querySelector(".fa-image");
 
-choixImg.addEventListener("change", function () {
-    getImgData ();
+
+choixImg.addEventListener("change", function () {    
+    if (this.files[0].size > 4200000) {
+        alert("taille image > 4 mo");
+        this.value = "";
+    } else {
+        getImgData ();
+    }
 });
+
+imgPreview.addEventListener("click", function () {
+    const imageUniquement = document.querySelector(".photoAjouter img")
+    inputFile.style.display = null
+    logoImg.style.display = null
+    imageUniquement.style.display = "none"
+})
 
 function getImgData () {
     const files = choixImg.files[0];
+   
     if (files) {
         const fileReader = new FileReader ();
         fileReader.readAsDataURL(files);
@@ -205,6 +225,12 @@ function getImgData () {
             imgPreview.style.display = "block";
             imgPreview.innerHTML = `<img src="` + this.result + `"/>`
             inputFile.style.display = "none";
+            logoImg.style.display = "none";
         })
     }
 }
+
+
+
+
+

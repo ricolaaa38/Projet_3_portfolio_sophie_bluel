@@ -2,6 +2,7 @@ const works = await fetch("http://localhost:5678/api/works");
 const projets = await works.json();
 const category = await fetch("http://localhost:5678/api/categories");
 const categorie = await category.json();
+let myToken = sessionStorage.getItem("token");
 
 function genererProjets(projets) {
   for (let i = 0; i < projets.length; i++) {
@@ -125,10 +126,58 @@ function genererCategorieModal2 () {
     const typeCategorie = document.createElement("option");
     typeCategorie.innerHTML = categorie[i].name;
     typeCategorie.value = categorie[i].name;
-    console.log(typeCategorie)
     sectionCategorie.appendChild(typeCategorie)
   }
 
 }
 
 genererCategorieModal2()
+
+
+// fonction pour controler le remplissage du formulaire d'envoi, le creer et l'envoyer
+
+
+function genererNewProjet () {
+ 
+ const submitNewProjet = document.querySelector(".ajoutPhoto");
+  submitNewProjet.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const imageFormulaire = document.querySelector(".photoAjouter img").getAttribute("src");
+    const titreFormulaire = document.getElementById("titre").value;
+    const categorieFormulaire = document.getElementById("categorie");
+    const categorieValue = categorieFormulaire.option[categorieFormulaire.selectedIndex].value
+    
+    if (imageFormulaire === null || titreFormulaire === null || categorieFormulaire === null) {
+          alert("le formulaire est incomplet, veuillez remplir les champs manquants")
+    } else {
+      const formData = new FormData();
+      formData.append("image", imageFormulaire);
+      formData.append("title", titreFormulaire);
+      formData.append("category", categorieValue);
+      
+      const reponse = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${myToken}`,
+          ContentType: "multipart/form-data"
+        },
+        body: formData
+      })
+      if (reponse.ok) {
+        alert("Projet ajouté avec succés");
+      } else {
+        alert("Echec de l'ajout")
+      }
+  }})
+}
+ 
+
+
+  
+  
+
+
+
+
+

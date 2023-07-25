@@ -102,13 +102,14 @@
 		<button class="js-modal-close"><i class="fa-solid fa-xmark fa-xl"></i></button>
 		</div>
 		<h3 id="titleModal2">Ajout photo</h3>
-		<form class="ajoutPhoto">
+		<form class="ajoutPhoto" method="post" enctype="multipart/form-data">
 			<div class=" sectionAjouterPhoto">
 				<div class="photoAjouter">
-					<i class="fa-regular fa-image fa-2xl"></i>
+					<!-- emplacement de l'aperçu de la photo à ajouter au projet -->
 				</div>
+				<i class="fa-regular fa-image fa-2xl"></i>
 				<div class="zone-inputFile">
-				<input type="file" name="imgFile" id="imgFile" accept="image/.png, image/.jpg" >
+				<input type="file" name="imgFile" id="imgFile" accept="image/.png, image/.jpg" max-size="4096" >
 				<label for="imgFile">+ Ajouter Photo</label>
 				<p>jpg, png : 4mo max</p>
 				</div>
@@ -119,14 +120,11 @@
 			<label for="categorie">Catégorie</label>
 			<select name="categorie" id="categorie">
 				<option value=""></option>
-				<!-- <option value="objet">Objet</option>
-				<option value="appartements">Appartements</option>
-				<option value="hotelsBarRestaurants">Hôtels Bar & Restaurants</option> -->
 			</select>
 			
 			<hr>
 
-			<input type="submit" value="valider">
+			<input type="submit" value="valider" id="submitFormulaire">
 		</form>
 	</div>
 </aside>
