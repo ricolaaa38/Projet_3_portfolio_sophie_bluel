@@ -41,7 +41,7 @@ function afficherMessageErreur() {
         popup.append(spanErreurMessage)
     }
     
-    spanErreurMessage.innerText = "les identifiants mot de passe et/ou e-mail sont inconnus";
+    spanErreurMessage.innerText = "Erreur dans l’identifiant ou le mot de passe";
 }
 
 

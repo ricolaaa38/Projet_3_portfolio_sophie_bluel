@@ -144,7 +144,7 @@ li:hover, a:hover {
 }
 #contact, .login {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > *, .login > * {
 	text-align: center;
@@ -160,13 +160,13 @@ margin: auto;
 	flex-direction: column;
 }
 
-#contact input, .login input {
+#contact input, .login input, .ajoutPhoto input, .ajoutPhoto select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label, .login label {
+#contact label, .login label, .ajoutPhoto label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -180,7 +180,7 @@ input[type="submit"] {
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
-	width: 180px;
+	width: 200px;
 	text-align: center;
 	border-radius: 60px ;
 }
@@ -197,7 +197,7 @@ footer nav ul {
 
 .login {
 	margin-top: 15%;
-	margin-bottom: 20%;
+	margin-bottom: 15%;
 }
 .login p {
 	display: flex;
@@ -210,6 +210,9 @@ footer nav ul {
 	font-size: 1.4em;
 	color: red;
 }
+
+
+/* css pour bouton filtre galerie */
 
 .filtres {
 	display: flex;
@@ -224,6 +227,9 @@ footer nav ul {
 	border: 1px solid black;
 	
 }
+
+
+
 
 nav img:hover {
 	opacity: 0.5;
@@ -276,38 +282,13 @@ body .barre-edition {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, 0.8);
+	background: rgba(0, 0, 0, 0.6);
 	animation: fadeIn .3s both;
 }
 
-.modal2 {
-	position: fixed;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.8);
-	animation: fadeIn .3s both;
-}
 
 .modal-wrapper {
 	overflow: auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width: 600px;
-	max-width: calc(100vw-20px);
-	max-height: calc(100vh-20px);
-	padding: 20px;
-	background-color: #fff;
-	animation: slideFromTop 0.5s both;
-	border-radius: 20px;
-}
-
-.modal-wrapper2 {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -326,16 +307,28 @@ body .barre-edition {
 	border: white;
 }
 
-.js-modal-close:hover {
+.boutonRaccourciModal2 {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.js-modal-retour, .js-modal2-close {
+	background-color: white;
+	border: white;
+}
+
+.js-modal-close:hover, .js-modal2-close:hover, .js-modal-retour:hover {
 	opacity: 0.5;
 }
 
 .modal-wrapper h3 {
 	font-size: 26px;
+	margin-top: 20px;
 }
 
 .zoneModifProjets {
-	width: 80%;
+	width: 75%;
 	display: grid;
 	justify-content: center;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -343,6 +336,7 @@ body .barre-edition {
 	grid-row-gap: 10px;
 
 }
+
 .zoneModifProjets article {
 	position: relative;
 }
@@ -396,7 +390,7 @@ body .barre-edition {
 
 hr {
 	color: #b3b3b3;
-	width: 70%;
+	width: 75%;
 	border: 1px solid;
 	margin-top: 15px;
 	margin-bottom: 15px;
@@ -440,7 +434,7 @@ hr {
 	to { transform: translateY(50px); }
 }
 
-/* bouton de la modal 1 */
+/* bouton de la modal 1 pour activer la modal 2*/
 .js-modal2 {
 	text-align: center;
 	font: bold 14px Arial;
@@ -460,3 +454,123 @@ hr {
 	color: white;
 	opacity: 0.8;
 }
+
+/* css formulaire modal 2 */
+
+.ajoutPhoto {
+	display: flex;
+	flex-direction: column;
+	width: 75%;
+	text-align: left;
+	margin-top: 50px;
+}
+
+
+select {
+	margin-bottom: 50px;
+	background-color: white;
+}
+
+.ajoutPhoto input[type="submit"] {
+	width: 267px;
+	margin-top: 20px;
+}
+
+.ajoutPhoto hr {
+	margin-left: 0;
+	margin-right: 0;
+	width: 100%;
+}
+
+.sectionAjouterPhoto {
+	background-color: #e8f1f6;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	height: 180px;
+	margin-bottom: 7px;
+}
+
+.sectionAjouterPhoto p {
+	color: #444444;
+	margin: 0 0 10px 0;
+	font-size: 11px;
+}
+
+.sectionAjouterPhoto p:hover {
+	opacity: 1;
+}
+
+.fa-image {
+	display: block;
+	color: #b9c5cc;
+}
+
+/* 
+label.btnAjouterPhoto {
+	margin-top: 25px;
+	margin-bottom: 5px;
+}
+
+.btnAjouterPhoto {
+	text-align: center;
+	font: bold 16px Arial;
+	text-decoration: none;
+	background-color: #cbd6dc;
+	color: #306685;
+	padding-top: 15px;
+	width: 200px;
+	height: 36px;
+	font-family: 'Syne';
+	font-weight: 700;
+	border-radius: 60px;
+}
+.btnAjouterPhoto:hover {
+	opacity: 0.8;
+} */
+
+
+.zone-inputFile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.photoAjouter {
+	margin-top: 0;
+	height: 180px;
+	border: none;
+	margin-bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.photoAjouter img {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+input[type="file"] {
+	height: 0;  
+	width: 0;
+	overflow: hidden;
+  }
+
+input[type="file"] + label {
+	font-family: sans-serif;
+	background: #cbd6dc;
+	padding: 10px 30px;
+	border: 2px solid #cbd6dc;
+	border-radius: 20px;
+	color: #306685;
+	cursor: pointer;
+	transition: all 0.2s;
+  }
+  
+input[type="file"] + label:hover {
+	opacity: 0.6;
+  }
+  

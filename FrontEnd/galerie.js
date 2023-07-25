@@ -1,6 +1,7 @@
 const works = await fetch("http://localhost:5678/api/works");
 const projets = await works.json();
-
+const category = await fetch("http://localhost:5678/api/categories");
+const categorie = await category.json();
 
 function genererProjets(projets) {
   for (let i = 0; i < projets.length; i++) {
@@ -20,9 +21,7 @@ function genererProjets(projets) {
     }
   }
 
-
 genererProjets(projets);
-
 
 function genererProjetsModal(projets) {
   for (let i = 0; i < projets.length; i++) {
@@ -80,8 +79,7 @@ function genererProjetsModal(projets) {
 
 genererProjetsModal(projets);
 
- 
-
+// fonction de filtre "tous"
 
 const boutonTous = document.querySelector(".tous");
 boutonTous.addEventListener("click", function () {
@@ -90,39 +88,47 @@ boutonTous.addEventListener("click", function () {
     
 })
 
-const boutonObjets = document.querySelector(".objets");
-boutonObjets.addEventListener("click", function () {
-  const projetsObjets = projets.filter(function (projet) {
-    if (projet.category.name === "Objets"){
-    return projet;
-    }
-  });
+
+// function pour filtrer les projets au click sur les boutons
+
+function filtre (button) {
+  button.addEventListener("click", function () {
+    const filtreProjet = projets.filter(projet => {
+      return projet.category.name === button.innerText;
+    });
     document.querySelector(".gallery").innerHTML = "";
-    genererProjets(projetsObjets);    
+    genererProjets(filtreProjet)
+  })
+}
 
-});
+// fonction de generation de bouton de filtres
 
-const boutonAppartements = document.querySelector(".appartements");
-boutonAppartements.addEventListener("click", function () {
-  const projetsAppartements = projets.filter(function (projet) {
-    if (projet.category.name === "Appartements"){
-    return projet;
-    }
-  });
-    document.querySelector(".gallery").innerHTML = "";
-    genererProjets(projetsAppartements);
+function genererBtnFiltres () {
+  for (let i = 0; i < categorie.length; i++) {
+    const sectionBtnFiltres = document.querySelector(".filtres");
+    const projetCategorieBtn = document.createElement("button");
+    projetCategorieBtn.innerHTML = categorie[i].name;
 
-});
+    sectionBtnFiltres.appendChild(projetCategorieBtn);
 
-const boutonHotelRestaurants = document.querySelector(".hotel-restaurants");
-boutonHotelRestaurants.addEventListener("click", function () {
-  const projetsHotelRestaurants = projets.filter(function (projet) {
-    if (projet.category.name === "Hotels & restaurants"){
-    return projet;
-    }
-  });
-    document.querySelector(".gallery").innerHTML = "";
-    genererProjets(projetsHotelRestaurants);
+    filtre (projetCategorieBtn)
+}
+}
 
-});
+genererBtnFiltres();
 
+// fonction pour generer les categories sur la modal d'ajout de nouveau projet
+
+function genererCategorieModal2 () {
+  for (let i = 0; i < categorie.length; i++) {
+    const sectionCategorie = document.getElementById("categorie");
+    const typeCategorie = document.createElement("option");
+    typeCategorie.innerHTML = categorie[i].name;
+    typeCategorie.value = categorie[i].name;
+    console.log(typeCategorie)
+    sectionCategorie.appendChild(typeCategorie)
+  }
+
+}
+
+genererCategorieModal2()

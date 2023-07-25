@@ -18,10 +18,8 @@ const openModal = function (e) {
     modal.setAttribute("aria-modal", true);
     modal.addEventListener("click", closeModal);
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal);
-    modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);
-    
+    modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);    
 }
-
 
 // fonction pour fermer la modal
 const closeModal = function (e) {
@@ -65,30 +63,6 @@ const focusInModal = function (e) {
 }
 
 
-// ouverture de la modale 1 sur le click du lien
-document.querySelectorAll(".js-modal").forEach(a => {
-    a.addEventListener("click", openModal );
-    
-})
-
-
-// Ajout de controle clavier sur la modale
-window.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" || e.key === "Esc") {
-        if (modal2 !== null) {
-            closeModal2(e);
-        } else {
-            closeModal(e);
-        }
-    }
-    if (e.key === "Tab" && modal !== null && modal2 === null) {
-        focusInModal(e);
-    }
-    if (e.key === "Tab" && modal2 !== null) {
-        focusInModal2(e);
-    }
-})
-
 
 // Modale 2 Ajout photo
 
@@ -104,13 +78,19 @@ const openModal2 = function (e) {
     focusables2 = Array.from(modal2.querySelectorAll(focusableSelector))
     previouslyFocusedElement = document.querySelector(":focus");
     modal2.style.display = null;
+    modal.style.display = "none";
     focusables2[0].focus();
     modal2.removeAttribute("aria-hidden");
     modal2.setAttribute("aria-modal", "true");
     modal2.addEventListener("click", closeModal2);
-    modal2.querySelector(".js-modal2-close").addEventListener("click", closeModal2);
-    modal2.querySelector(".js-modal2-stop").addEventListener("click", stopPropagation);
-
+    modal2.querySelector(".js-modal-close").addEventListener("click", closeModal2);
+    modal2.querySelector(".js-modal-close").addEventListener("click", closeModal);
+    modal2.querySelector(".js-modal2-stop").addEventListener("click", stopPropagation);   
+    const btnRetour = document.querySelector(".js-modal-retour")
+        btnRetour.addEventListener("click", function (e) {
+            modal2.style.display = "none";
+            modal.style.display = null;
+        })
 }
 
 // fonction pour fermer la modal
@@ -122,7 +102,8 @@ const closeModal2 = function (e) {
     modal2.setAttribute("aria-hidden", "true");
     modal2.removeAttribute("aria-modal");
     modal2.removeEventListener("click", closeModal2);
-    modal2.querySelector(".js-modal2-close").removeEventListener("click", closeModal2);
+    modal2.querySelector(".js-modal-close").removeEventListener("click", closeModal2);
+    modal2.querySelector(".js-modal-close").removeEventListener("click", closeModal);
     modal2.querySelector(".js-modal2-stop").removeEventListener("click", stopPropagation);
     const hideModal2 = function () {
         modal2.style.display = "none";
@@ -137,45 +118,61 @@ const closeModal2 = function (e) {
 // fonction pour le controle avec Tab
 const focusInModal2 = function (e) {
     e.preventDefault();
-    let index = focusables2.findIndex(f => f === modal2.querySelector(":focus"));
+    let index2 = focusables2.findIndex(f => f === modal2.querySelector(":focus"));
     if (e.shiftkey === true) {
-        index --;
+        index2 --;
     } else {
-        index ++;
+        index2 ++;
     }
-    if (index >= focusables2.length) {
-        index = 0;
+    if (index2 >= focusables2.length) {
+        index2 = 0;
     }
-    if (index < 0) {
-        index = focusables2.length - 1;
+    if (index2 < 0) {
+        index2 = focusables2.length - 1;
     }
-    focusables2[index].focus();
+    focusables2[index2].focus();
 }
 
 
+
+
+
+
+
+
+// ouverture de la modale 1 sur le click du lien
+document.querySelectorAll(".js-modal").forEach(a => {
+    a.addEventListener("click", openModal );  
+})
+
 // ouverture de la modale 2 sur le click du lien
 document.querySelectorAll(".js-modal2").forEach(a => {
-    a.addEventListener("click", openModal2 );
-    
+    a.addEventListener("click", openModal2);
 })
 
 
+// Ajout de controle clavier sur la modale
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+window.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" || e.key === "Esc") {
+        if (modal2 !== null) {
+            closeModal2(e);
+            closeModal(e);
+        } else {
+            closeModal(e);
+        }
+    }
+    // if (e.key === "Tab" && modal.style.display !== null) {
+    //     focusInModal(e);
+    // } 
+    if (e.key === "Tab" && modal !== null && modal2 === null) {
+        focusInModal(e);        
+    } else if (e.key === "Tab" && modal !== null && modal2 !== null && modal2.style.display !== "none") {
+        focusInModal2(e);                   
+    } else if (e.key === "Tab" && modal !== null && modal2.style.display === "none") {
+        focusInModal(e);
+    }
+})
 
 
 
@@ -187,3 +184,27 @@ if (myToken !== null && myToken !== "") {
     barreEdition.style.display = null;
 }
 
+
+// fonction pour faire un apercu de l'image à uploader
+
+
+const choixImg = document.getElementById("imgFile");
+const imgPreview = document.querySelector(".photoAjouter");
+const inputFile = document.querySelector(".zone-inputFile");
+
+choixImg.addEventListener("change", function () {
+    getImgData ();
+});
+
+function getImgData () {
+    const files = choixImg.files[0];
+    if (files) {
+        const fileReader = new FileReader ();
+        fileReader.readAsDataURL(files);
+        fileReader.addEventListener("load", function () {
+            imgPreview.style.display = "block";
+            imgPreview.innerHTML = `<img src="` + this.result + `"/>`
+            inputFile.style.display = "none";
+        })
+    }
+}
