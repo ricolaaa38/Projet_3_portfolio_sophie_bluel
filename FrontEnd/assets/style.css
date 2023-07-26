@@ -474,6 +474,7 @@ select {
 .ajoutPhoto input[type="submit"] {
 	width: 267px;
 	margin-top: 20px;
+	background-color: #a7a7a7;
 }
 
 .ajoutPhoto hr {

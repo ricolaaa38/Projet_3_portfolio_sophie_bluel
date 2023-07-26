@@ -231,6 +231,23 @@ function getImgData () {
 }
 
 
+// fonction pour activer et modifier le submit de l'envoi de formulaire
 
+const submitFormulaire = document.getElementById("submitFormulaire");
+const inputImgForm = document.getElementById("imgFile");
+const inputTitreForm = document.getElementById("titre"); 
+const inputCategorieForm = document.getElementById("categorie");
+
+
+function activateSubmitForm () {
+    if (inputImgForm.files.length > 0 && inputTitreForm.value !== "" && inputCategorieForm.value !== "") {
+        submitFormulaire.style.backgroundColor = "#1D6154"
+        submitFormulaire.disabled = false
+    } 
+}
+
+inputImgForm.addEventListener("input", activateSubmitForm);
+inputTitreForm.addEventListener("input", activateSubmitForm);
+inputCategorieForm.addEventListener("input", activateSubmitForm);
 
 

@@ -142,35 +142,34 @@ function genererNewProjet () {
  const submitNewProjet = document.querySelector(".ajoutPhoto");
   submitNewProjet.addEventListener("submit", async function (e) {
     e.preventDefault();
-    const imageFormulaire = document.querySelector(".photoAjouter img").getAttribute("src");
+    const imageFormulaire = document.getElementById("imgFile").files[0];
     const titreFormulaire = document.getElementById("titre").value;
-    const categorieFormulaire = document.getElementById("categorie");
-    const categorieValue = categorieFormulaire.option[categorieFormulaire.selectedIndex].value
+    const categorieFormulaire = document.getElementById("categorie").value;
     
-    if (imageFormulaire === null || titreFormulaire === null || categorieFormulaire === null) {
-          alert("le formulaire est incomplet, veuillez remplir les champs manquants")
-    } else {
-      const formData = new FormData();
-      formData.append("image", imageFormulaire);
-      formData.append("title", titreFormulaire);
-      formData.append("category", categorieValue);
+    
+    const formData = new FormData();
+    formData.append("image", imageFormulaire);
+    formData.append("title", titreFormulaire);
+    formData.append("category", categorieFormulaire);
       
-      const reponse = await fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          Authorization: `Bearer ${myToken}`,
-          ContentType: "multipart/form-data"
-        },
-        body: formData
-      })
-      if (reponse.ok) {
-        alert("Projet ajouté avec succés");
-      } else {
-        alert("Echec de l'ajout")
-      }
-  }})
+    const reponse = await fetch("http://localhost:5678/api/works", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${myToken}`,
+        ContentType: "multipart/form-data"
+      },
+      body: formData
+    })
+    if (reponse.ok) {
+      alert("Projet ajouté avec succés");
+    } else {
+      alert("Echec de l'ajout du projet")
+    }
+  })
 }
+
+genererNewProjet()
  
 
 
