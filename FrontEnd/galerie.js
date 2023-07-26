@@ -12,7 +12,6 @@ function genererProjets(projets) {
     const sectionProjets = document.querySelector(".gallery");
     const projetElement = document.createElement("article");
     projetElement.dataset.id = projets[i].id;
-    
 
     const imageProjet = document.createElement("img");
     imageProjet.src = article.imageUrl;
@@ -22,8 +21,7 @@ function genererProjets(projets) {
     sectionProjets.appendChild(projetElement);
     projetElement.appendChild(imageProjet);
     projetElement.appendChild(nomProjet);
-    }
-  
+  }
 }
 
 genererProjets(projets);
@@ -33,7 +31,7 @@ genererProjets(projets);
 function genererProjetsModal(projets) {
   for (let i = 0; i < projets.length; i++) {
     const article = projets[i];
-    const sectionModal = document.querySelector(".zoneModifProjets")
+    const sectionModal = document.querySelector(".zoneModifProjets");
     const modalElement = document.createElement("article");
     modalElement.dataset.id = projets[i].id;
     modalElement.className = "modalElement";
@@ -49,7 +47,7 @@ function genererProjetsModal(projets) {
     logoFleche.className = "logoFleche";
     const logoTrash = document.createElement("button");
     logoTrash.innerHTML = '<i class="fa-solid fa-trash"></i>';
-    logoTrash.className = "logoTrash"
+    logoTrash.className = "logoTrash";
     logoTrash.dataset.id = projets[i].id;
 
     sectionModal.appendChild(modalElement);
@@ -60,79 +58,78 @@ function genererProjetsModal(projets) {
     modalElement.appendChild(nomModal);
 
     // supprimerProjet(logoTrash)
-    
-    logoTrash.addEventListener("click", async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const iconeElement = article.id;
-    console.log(iconeElement);
 
-    let response = await fetch(`http://localhost:5678/api/works/${iconeElement}`, {
-        method: "DELETE",
-        headers: {
+    logoTrash.addEventListener("click", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const iconeElement = article.id;
+      console.log(iconeElement);
+
+      let response = await fetch(
+        `http://localhost:5678/api/works/${iconeElement}`,
+        {
+          method: "DELETE",
+          headers: {
             accept: "*/*",
-            Authorization: `Bearer ${myToken}`
-        },
-    });  
-    if (response.ok) {
-      alert("Projet supprimé avec succés");
-      let divGalerie = document.querySelector(".gallery")
-      let btnFiltres = document.querySelector(".filtres")
-      btnFiltres.innerHTML = "";
-      divGalerie.innerHTML = "";     
-      modalElement.remove();
-      works = await fetch("http://localhost:5678/api/works");
-      projets = await works.json();
-      genererProjets(projets);
-      btnTous(projets)
-      genererBtnFiltres(projets);
-    } else {
-      alert("Echec de suppression")
-    }
-  })
-    }
+            Authorization: `Bearer ${myToken}`,
+          },
+        }
+      );
+      if (response.ok) {
+        alert("Projet supprimé avec succés");
+        let divGalerie = document.querySelector(".gallery");
+        let btnFiltres = document.querySelector(".filtres");
+        btnFiltres.innerHTML = "";
+        divGalerie.innerHTML = "";
+        modalElement.remove();
+        works = await fetch("http://localhost:5678/api/works");
+        projets = await works.json();
+        genererProjets(projets);
+        btnTous(projets);
+        genererBtnFiltres(projets);
+      } else {
+        alert("Echec de suppression");
+      }
+    });
   }
+}
 
 genererProjetsModal(projets);
 
-
 // fonction de filtre "tous"
 
-function btnTous (projets) {
+function btnTous(projets) {
   const zoneBtnTous = document.querySelector(".filtres");
-  const tous = document.createElement("button")
+  const tous = document.createElement("button");
   tous.innerText = "tous";
   tous.className = "tous";
-  
-  zoneBtnTous.appendChild(tous)
+
+  zoneBtnTous.appendChild(tous);
 
   const boutonTous = document.querySelector(".tous");
   boutonTous.addEventListener("click", function () {
-    document.querySelector(".gallery").innerHTML ="";
+    document.querySelector(".gallery").innerHTML = "";
     genererProjets(projets);
-    
-})
+  });
 }
-
 
 btnTous(projets);
 
-
 // function pour filtrer les projets au click sur les boutons
 
-function filtre (button, projets) {
+function filtre(button, projets) {
   button.addEventListener("click", function () {
-    const filtreProjet = projets.filter(projet => {
+    const filtreProjet = projets.filter((projet) => {
       return projet.category.name === button.innerText;
     });
     document.querySelector(".gallery").innerHTML = "";
-    genererProjets(filtreProjet)
-  })
+    genererProjets(filtreProjet);
+  });
 }
 
 // fonction de generation de bouton de filtres
 
-function genererBtnFiltres (projets) {
+function genererBtnFiltres(projets) {
   for (let i = 0; i < categorie.length; i++) {
     const sectionBtnFiltres = document.querySelector(".filtres");
     const projetCategorieBtn = document.createElement("button");
@@ -140,88 +137,79 @@ function genererBtnFiltres (projets) {
 
     sectionBtnFiltres.appendChild(projetCategorieBtn);
 
-    filtre (projetCategorieBtn, projets)
-}
+    filtre(projetCategorieBtn, projets);
+  }
 }
 
 genererBtnFiltres(projets);
 
 // fonction pour generer les categories sur la modal d'ajout de nouveau projet
 
-function genererCategorieModal2 () {
+function genererCategorieModal2() {
   for (let i = 0; i < categorie.length; i++) {
     const sectionCategorie = document.getElementById("categorie");
     const typeCategorie = document.createElement("option");
     typeCategorie.innerHTML = categorie[i].name;
     typeCategorie.value = categorie[i].name;
-    typeCategorie.setAttribute("id", categorie[i].id)
-    sectionCategorie.appendChild(typeCategorie)
-    
+    typeCategorie.setAttribute("id", categorie[i].id);
+    sectionCategorie.appendChild(typeCategorie);
   }
-
 }
 
-genererCategorieModal2()
-
+genererCategorieModal2();
 
 // fonction pour controler le remplissage du formulaire d'envoi, le creer et l'envoyer
 
-
-function genererNewProjet () {
- 
- const submitNewProjet = document.querySelector(".ajoutPhoto");
+function genererNewProjet() {
+  const submitNewProjet = document.querySelector(".ajoutPhoto");
   submitNewProjet.addEventListener("submit", async function (e) {
     e.preventDefault();
     const imageFormulaire = document.getElementById("imgFile").files[0];
     const titreFormulaire = document.getElementById("titre").value;
     const categorieFormulaire = document.getElementById("categorie");
-    const categorieValue = categorieFormulaire.options[categorieFormulaire.selectedIndex].id;
-    
-    if (imageFormulaire === null || titreFormulaire === "" || categorieFormulaire === "") {
-      alert("formulaire incorrect")
-    } else {
-        const formData = new FormData();
-        formData.append("image", imageFormulaire);
-        formData.append("title", titreFormulaire);
-        formData.append("category", categorieValue);
+    const categorieValue =
+      categorieFormulaire.options[categorieFormulaire.selectedIndex].id;
 
-        console.log(formData)
-          
-        const reponse = await fetch("http://localhost:5678/api/works", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${myToken}`
-          },
-          body: formData
-        })
-        if (reponse.ok) {
-          alert("Projet ajouté avec succés ");
-          let zoneModifProjets = document.querySelector(".zoneModifProjets");
-          let divGalerie = document.querySelector(".gallery");
-          let btnFiltres = document.querySelector(".filtres");
-          zoneModifProjets.innerHTML = "";
-          btnFiltres.innerHTML = "";
-          divGalerie.innerHTML = "";     
-          works = await fetch("http://localhost:5678/api/works");
-          projets = await works.json();
-          genererProjets(projets);
-          btnTous(projets)
-          genererBtnFiltres(projets);
-          genererProjetsModal(projets);
-        } else {
-          alert("Echec de l'ajout du projet")
-        }
+    if (
+      imageFormulaire === null ||
+      titreFormulaire === "" ||
+      categorieFormulaire === ""
+    ) {
+      alert("formulaire incorrect");
+    } else {
+      const formData = new FormData();
+      formData.append("image", imageFormulaire);
+      formData.append("title", titreFormulaire);
+      formData.append("category", categorieValue);
+
+      console.log(formData);
+
+      const reponse = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${myToken}`,
+        },
+        body: formData,
+      });
+      if (reponse.ok) {
+        alert("Projet ajouté avec succés ");
+        let zoneModifProjets = document.querySelector(".zoneModifProjets");
+        let divGalerie = document.querySelector(".gallery");
+        let btnFiltres = document.querySelector(".filtres");
+        zoneModifProjets.innerHTML = "";
+        btnFiltres.innerHTML = "";
+        divGalerie.innerHTML = "";
+        works = await fetch("http://localhost:5678/api/works");
+        projets = await works.json();
+        genererProjets(projets);
+        btnTous(projets);
+        genererBtnFiltres(projets);
+        genererProjetsModal(projets);
+      } else {
+        alert("Echec de l'ajout du projet");
+      }
     }
-    
-    
-  })
+  });
 }
 
-genererNewProjet()
- 
-
-
-
-
-
-
+genererNewProjet();
