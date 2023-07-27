@@ -87,6 +87,7 @@ function genererProjetsModal(projets) {
         genererProjets(projets);
         btnTous(projets);
         genererBtnFiltres(projets);
+        initListener();
       } else {
         alert("Echec de suppression");
       }
@@ -102,11 +103,11 @@ function btnTous(projets) {
   const zoneBtnTous = document.querySelector(".filtres");
   const tous = document.createElement("button");
   tous.innerText = "tous";
-  tous.className = "tous";
+  tous.className = "btnTous";
 
   zoneBtnTous.appendChild(tous);
 
-  const boutonTous = document.querySelector(".tous");
+  const boutonTous = document.querySelector(".btnTous");
   boutonTous.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML = "";
     genererProjets(projets);
@@ -134,14 +135,40 @@ function genererBtnFiltres(projets) {
     const sectionBtnFiltres = document.querySelector(".filtres");
     const projetCategorieBtn = document.createElement("button");
     projetCategorieBtn.innerHTML = categorie[i].name;
-
+    projetCategorieBtn.className = categorie[i].name;
     sectionBtnFiltres.appendChild(projetCategorieBtn);
-
+    
     filtre(projetCategorieBtn, projets);
-  }
+  } 
+    
 }
 
 genererBtnFiltres(projets);
+
+// fonction pour colorer les boutons filtres
+
+let selectedFilterElement;
+
+function initListener() {
+  const buttons = document.querySelectorAll(".filtres button");
+  buttons.forEach((button) => button.addEventListener('click', () => {
+    console.log(button);
+    if (selectedFilterElement) {
+      selectedFilterElement.classList.remove('selected');
+      selectedFilterElement.style.backgroundColor = "#fffef8"
+      selectedFilterElement.style.color = "#1d6154"
+    }
+    selectedFilterElement = button;
+    selectedFilterElement.classList.add('selected');
+    selectedFilterElement.style.backgroundColor = "#1d6154"
+    selectedFilterElement.style.color = "#ffffff"
+    
+
+  }));
+}
+
+initListener();
+
 
 // fonction pour generer les categories sur la modal d'ajout de nouveau projet
 
@@ -205,6 +232,7 @@ function genererNewProjet() {
         btnTous(projets);
         genererBtnFiltres(projets);
         genererProjetsModal(projets);
+        initListener();
       } else {
         alert("Echec de l'ajout du projet");
       }

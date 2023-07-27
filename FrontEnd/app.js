@@ -56,6 +56,7 @@ const focusInModal = function (e) {
     index--;
   } else {
     index++;
+    
   }
   if (index >= focusables.length) {
     index = 0;
@@ -134,14 +135,18 @@ const focusInModal2 = function (e) {
   if (e.shiftkey === true) {
     index2--;
   } else {
-    index2++;
+    index2++;    
   }
-  if (index2 >= focusables2.length) {
-    index2 = 0;
-  }
-  if (index2 < 0) {
-    index2 = focusables2.length - 1;
-  }
+  if (focusables2.disabled === true  ) {
+      index2++
+    }
+    if (index2 >= focusables2.length) {
+      index2 = 0;
+    }
+    if (index2 < 0) {
+      index2 = focusables2.length - 1;
+    }
+  
   focusables2[index2].focus();
 };
 
@@ -199,7 +204,8 @@ if (myToken !== null && myToken !== "") {
 
 const choixImg = document.getElementById("imgFile");
 const imgPreview = document.querySelector(".photoAjouter");
-const inputFile = document.querySelector(".zone-inputFile");
+const pFile = document.querySelector(".pFile");
+const labelFile = document.querySelector(".labelFile");
 const logoImg = document.querySelector(".fa-image");
 
 choixImg.addEventListener("change", function () {
@@ -213,7 +219,8 @@ choixImg.addEventListener("change", function () {
 
 imgPreview.addEventListener("click", function () {
   const imageUniquement = document.querySelector(".photoAjouter img");
-  inputFile.style.display = null;
+  labelFile.style.display = null;
+  pFile.style.display = null;
   logoImg.style.display = null;
   imageUniquement.style.display = "none";
 });
@@ -227,7 +234,8 @@ function getImgData() {
     fileReader.addEventListener("load", function () {
       imgPreview.style.display = "block";
       imgPreview.innerHTML = `<img src="` + this.result + `"/>`;
-      inputFile.style.display = "none";
+      labelFile.style.display = "none";
+      pFile.style.display = "none";
       logoImg.style.display = "none";
     });
   }
