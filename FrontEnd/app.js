@@ -135,13 +135,18 @@ const focusInModal2 = function (e) {
     index2--;
   } else {
     index2++;
+
+    if (focusables2[index2].disabled === true) {
+      index2++
+    }
+    if (index2 >= focusables2.length) {
+      index2 = 0;
+    }
+    if (index2 < 0) {
+      index2 = focusables2.length - 1;
+    }
   }
-  if (index2 >= focusables2.length) {
-    index2 = 0;
-  }
-  if (index2 < 0) {
-    index2 = focusables2.length - 1;
-  }
+  
   focusables2[index2].focus();
 };
 
