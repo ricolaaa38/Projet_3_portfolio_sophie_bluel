@@ -136,7 +136,7 @@ function genererBtnFiltres(projets) {
     projetCategorieBtn.innerHTML = categorie[i].name;
     projetCategorieBtn.className = categorie[i].name;
     sectionBtnFiltres.appendChild(projetCategorieBtn);
-
+    
     filtre(projetCategorieBtn, projets);
   } 
     
@@ -154,9 +154,14 @@ function initListener() {
     console.log(button);
     if (selectedFilterElement) {
       selectedFilterElement.classList.remove('selected');
+      selectedFilterElement.style.backgroundColor = "#fffef8"
+      selectedFilterElement.style.color = "#1d6154"
     }
     selectedFilterElement = button;
     selectedFilterElement.classList.add('selected');
+    selectedFilterElement.style.backgroundColor = "#1d6154"
+    selectedFilterElement.style.color = "#ffffff"
+    
 
   }));
 }
