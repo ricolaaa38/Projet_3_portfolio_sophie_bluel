@@ -87,6 +87,7 @@ function genererProjetsModal(projets) {
         genererProjets(projets);
         btnTous(projets);
         genererBtnFiltres(projets);
+        initListener();
       } else {
         alert("Echec de suppression");
       }
@@ -231,6 +232,7 @@ function genererNewProjet() {
         btnTous(projets);
         genererBtnFiltres(projets);
         genererProjetsModal(projets);
+        initListener();
       } else {
         alert("Echec de l'ajout du projet");
       }
