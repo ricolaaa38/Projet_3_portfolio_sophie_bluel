@@ -26,7 +26,7 @@ function genererProjets(projets) {
 
 genererProjets(projets);
 
-// fonction pour creer, afficher et supprimer les projets sur la modal
+// fonction pour creer, afficher et supprimer les projets sur la modal et les supprimer de la page du portfolio
 
 function genererProjetsModal(projets) {
   for (let i = 0; i < projets.length; i++) {
