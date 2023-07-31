@@ -198,6 +198,13 @@ if (myToken !== null && myToken !== "") {
   lienJsModal.style.display = null;
   const barreEdition = document.querySelector(".barre-edition");
   barreEdition.style.display = null;
+
+  // disparition des boutons filtres lors de la connexion de l'admin
+
+  const filtresDisplay = document.querySelector(".filtres");
+  filtresDisplay.style.display = "none";
+  const galerieMarginTop = document.querySelector(".gallery");
+  galerieMarginTop.style.marginTop = "50px";
 }
 
 // fonction pour faire un apercu de l'image à uploader et controler la taille du fichier
