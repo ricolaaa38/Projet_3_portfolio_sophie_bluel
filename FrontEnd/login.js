@@ -17,7 +17,6 @@ async function getUser() {
     let result = await response.json();
     let token = result.token;
     window.location.href = "index.html";
-    console.log(result);
     sessionStorage.setItem("token", token);
     connecte = true;
     sessionStorage.setItem("connecte", connecte);
