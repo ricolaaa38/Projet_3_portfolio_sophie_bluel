@@ -1,5 +1,5 @@
 let myToken = sessionStorage.getItem("token");
-let estConnecte = sessionStorage.getItem("connecte");
+
 
 if (myToken !== null && myToken !== "") {
   const logout = document.querySelector(".login-out");
@@ -12,9 +12,7 @@ if (myToken !== null && myToken !== "") {
 function logoutBtn(logout) {
   logout.addEventListener("click", function () {
     myToken = "";
-    estConnecte = false;
     sessionStorage.setItem("token", myToken);
-    sessionStorage.setItem("connecte", estConnecte);
     
   });
 }

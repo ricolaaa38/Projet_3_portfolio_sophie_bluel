@@ -1,5 +1,3 @@
-let connecte = true;
-
 async function getUser() {
   let users = {
     email: document.getElementById("emailLogin").value,
@@ -18,8 +16,6 @@ async function getUser() {
     let token = result.token;
     window.location.href = "index.html";
     sessionStorage.setItem("token", token);
-    connecte = true;
-    sessionStorage.setItem("connecte", connecte);
   } else {
     afficherMessageErreur();
     console.log("une erreur c'est produite");
