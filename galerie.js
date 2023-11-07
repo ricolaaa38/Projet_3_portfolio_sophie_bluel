@@ -102,7 +102,7 @@ genererProjetsModal(projets);
 function btnTous(projets) {
   const zoneBtnTous = document.querySelector(".filtres");
   const tous = document.createElement("button");
-  tous.innerText = "tous";
+  tous.innerText = "Tous";
   tous.className = "btnTous";
 
   zoneBtnTous.appendChild(tous);
